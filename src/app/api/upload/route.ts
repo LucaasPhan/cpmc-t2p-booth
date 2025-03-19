@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     const filename = `${file.name.replace(
       /\.[^/.]+$/,
       ""
-    )}-${d.getUTCHours().toString() + d.getUTCMinutes().toString() + d.getUTCSeconds().toString()}.${mime.getExtension(file.type)}`;
+    )}-${d.getUTCHours()*100 + d.getUTCMinutes() + d.getUTCSeconds()}.${mime.getExtension(file.type)}`;
     await writeFile(`${uploadDir}/${filename}`, buffer);
     return NextResponse.json({ fileUrl: `${relativeUploadDir}/${filename}` });
   } catch (e) {
