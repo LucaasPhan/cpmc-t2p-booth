@@ -21,8 +21,8 @@ export async function POST(request: NextRequest) {
 
   try {
     await stat(uploadDir);
-  } catch (e: any) {
-    if (e.code === "ENOENT") {
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === "ENOENT") {
       await mkdir(uploadDir, { recursive: true });
     } else {
       console.error(
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const d = new Date();
-    const filename = `${file.name.replace(
+    const filename = `${(file as File).name.replace(
       /\.[^/.]+$/,
       ""
     )}-${d.getUTCHours()*100 + d.getUTCMinutes() + d.getUTCSeconds()}.${mime.getExtension(file.type)}`;

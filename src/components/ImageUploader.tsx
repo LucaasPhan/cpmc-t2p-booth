@@ -9,7 +9,7 @@ interface ImageUploaderProps {
     hidden?: boolean;
 }
 
-export default function ImageUploader({onImageUpload, reset, hidden}: ImageUploaderProps) {
+export default function ImageUploader({onImageUpload, reset}: ImageUploaderProps) {
     const [image, setImage] = useState<string | null>(null);
     const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
     const [isImageUploaded, setIsImageUploaded] = useState(false);
